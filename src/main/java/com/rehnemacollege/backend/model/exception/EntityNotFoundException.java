@@ -9,6 +9,11 @@ public class EntityNotFoundException extends Exception {
         this.id = id;
     }
 
+    public EntityNotFoundException(Long id) {
+        super("entity not found");
+        this.id = id.intValue();
+    }
+
     public Integer getId() {
         return id;
     }

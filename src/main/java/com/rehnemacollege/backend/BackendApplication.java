@@ -33,9 +33,11 @@ public class BackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("-------------- run called --------------------");
-		Person person = new Person("1", "Ali");
-		this.personRepository.save(person);
-
+		Person person = null;
+		for (int i = 0; i < 100; i++) {
+			person = new Person((long) i, "Ali" + i);
+			this.personRepository.save(person);
+		}
 
 		Post post = new Post(1L, new Date(), "first post", "we are here", person);
 		this.postRepository.save(post);
