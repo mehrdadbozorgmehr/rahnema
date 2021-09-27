@@ -51,5 +51,9 @@ public class BackendApplication implements CommandLineRunner {
 		User user = new User(1L, "admin", passwordEncoder.encode("admin"),
 				true, "admin", 12, new ArrayList<>());
 		userRepository.save(user);
+
+		for (User u: userRepository.findAll()) {
+			System.out.println(u);
+		}
 	}
 }
