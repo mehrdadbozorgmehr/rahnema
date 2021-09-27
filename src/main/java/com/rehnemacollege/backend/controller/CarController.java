@@ -4,6 +4,7 @@ import com.rehnemacollege.backend.model.Car;
 import com.rehnemacollege.backend.model.exception.EntityNotFoundException;
 import com.rehnemacollege.backend.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ public class CarController {
     }
 
     @GetMapping("/get")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public Collection<Car> all() {
         return repo.all();
     }
@@ -31,6 +33,7 @@ public class CarController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void add(@Validated @RequestBody Car car) {
         repo.addOrUpdate(car);
     }

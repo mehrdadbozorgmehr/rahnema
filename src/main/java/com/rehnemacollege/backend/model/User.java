@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Collection;
 
 @Data
@@ -24,10 +25,8 @@ public class User implements UserDetails {
     private String name;
     private int age;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    @OneToMany
+    private Collection<Role> authorities;
 
     @Override
     public boolean isAccountNonExpired() {

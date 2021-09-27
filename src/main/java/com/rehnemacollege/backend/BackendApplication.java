@@ -15,6 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @SpringBootApplication
@@ -47,7 +48,8 @@ public class BackendApplication implements CommandLineRunner {
 			System.out.println(p);
 		}
 
-		User user = new User(1L, "admin", passwordEncoder.encode("admin"), true, "admin", 12);
+		User user = new User(1L, "admin", passwordEncoder.encode("admin"),
+				true, "admin", 12, new ArrayList<>());
 		userRepository.save(user);
 	}
 }
