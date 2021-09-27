@@ -3,28 +3,28 @@ package com.rehnemacollege.backend;
 import com.rehnemacollege.backend.model.Company;
 import com.rehnemacollege.backend.model.Person;
 import com.rehnemacollege.backend.model.Post;
+import com.rehnemacollege.backend.model.User;
 import com.rehnemacollege.backend.repository.CompanyRepository;
 import com.rehnemacollege.backend.repository.PersonRepository;
 import com.rehnemacollege.backend.repository.PostRepository;
+import com.rehnemacollege.backend.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class BackendApplication implements CommandLineRunner {
 
 	final PostRepository postRepository;
 	final PersonRepository personRepository;
-
-	@Autowired
-	public BackendApplication(PostRepository postRepository, PersonRepository personRepository) {
-		this.postRepository = postRepository;
-		this.personRepository = personRepository;
-	}
-
+	final UserRepository userRepository;
+	final PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -46,5 +46,8 @@ public class BackendApplication implements CommandLineRunner {
 		for (Post p: posts) {
 			System.out.println(p);
 		}
+
+		User user = new User(1L, "admin", passwordEncoder.encode("admin"), true, "admin", 12);
+		userRepository.save(user);
 	}
 }

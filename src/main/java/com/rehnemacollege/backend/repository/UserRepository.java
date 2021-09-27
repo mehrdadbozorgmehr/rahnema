@@ -1,27 +1,15 @@
 package com.rehnemacollege.backend.repository;
 
 import com.rehnemacollege.backend.model.User;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
+
 
 @Repository
-public class UserRepository {
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
-    private static Map<Integer, User> repo = new HashMap<>();
+    Optional<User> findByUsername(String username);
 
-    public void addOrUpdate(User user) {
-        repo.put(user.getId(), user);
-    }
-
-    public User get(Integer id) {
-        return repo.get(id);
-    }
-
-    public Collection<User> getAll() {
-        return repo.values();
-    }
 }
